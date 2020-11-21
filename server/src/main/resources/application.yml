@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:mysql://39.107.230.35:3306/site?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      idle-timeout: 60000
+      connection-timeout: 60000
+      validation-timeout: 3000
+      login-timeout: 5
+      max-lifetime: 600000
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 20MB
+      max-request-size: 30MB
+
+
+mybatis-plus:
+  mapper-locations: classpath*:com/onekki/ohmysite/module/**/mapper/xml/*Mapper.xml
+
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 8080
+  address: localhost

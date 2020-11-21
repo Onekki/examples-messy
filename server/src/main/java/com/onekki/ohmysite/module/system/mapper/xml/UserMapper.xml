@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onekki.ohmysite.module.system.mapper.UserMapper">
+
+    <resultMap id="userViewMap" type="com.onekki.ohmysite.module.system.entity.UserView">
+        <id property="id" column="u_id"  />
+        <result property="username" column="u_username"  />
+        <result property="nickname" column="u_nickname" />
+        <result property="password" column="u_password" />
+        <result property="avatarUrl" column="u_avatar_url" />
+        <result property="phone" column="u_phone" />
+        <result property="email" column="u_email" />
+        <result property="registerTime" column="u_register_time" />
+        <association property="role" column="r_id" javaType="com.onekki.ohmysite.module.system.entity.Role">
+            <id property="id" column="r_id" />
+            <result property="name" column="r_name" />
+        </association>
+    </resultMap>
+
+    <select id="pageView" resultMap="userViewMap">
+        SELECT
+            tsu.id as u_id,
+            tsu.username as u_username,
+            tsu.nickname as u_nickname,
+            tsu.password as u_password,
+            tsu.avatar_url as u_avatar_url,
+            tsu.phone as u_phone,
+            tsu.email as u_email,
+            tsu.register_time as u_register_time,
+                tsr.id as r_id,
+                tsr.name as r_name
+        FROM t_system_user tsu
+            LEFT JOIN t_system_role tsr on tsu.rid = tsr.id
+        <if test="skey != '' and skey != null ">
+            WHERE tsu.username LIKE CONCAT('%', #{skey}, '%')
+               OR tsu.nickname LIKE CONCAT('%', #{skey}, '%')
+        </if>
+    </select>
+</mapper>

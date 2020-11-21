@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onekki.ohmysite.module.system.mapper.PermMapper">
+
+    <select id="listByRid" resultType="com.onekki.ohmysite.module.system.entity.Perm">
+        SELECT
+            tsp.*
+        FROM
+            t_system_user tsu
+                LEFT JOIN t_system_role tsr ON tsr.id = tsu.rid
+                LEFT JOIN t_system_role_perm tsrp ON tsr.id = tsrp.rid
+                LEFT JOIN t_system_perm tsp ON tsrp.pid = tsp.id
+        WHERE
+            tsrp.rid = #{rid}
+    </select>
+
+    <resultMap id="permViewMap" type="com.onekki.ohmysite.module.system.entity.PermView">
+        <result property="title" column="p_title"  />
+        <collection property="permSet" ofType="com.onekki.ohmysite.module.system.entity.Perm">
+            <id property="id" column="p_id" />
+            <result property="code" column="p_code" />
+            <result property="name" column="p_name" />
+        </collection>
+    </resultMap>
+    <select id="listView" resultMap="permViewMap">
+        SELECT
+            tsp.id as p_id,
+            tsp.title as p_title,
+            tsp.code as p_code,
+            tsp.name as p_name
+        FROM t_system_perm tsp
+    </select>
+</mapper>
