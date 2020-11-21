@@ -1,0 +1,35 @@
+<h4>站点用户列表</h4>
+
+<div nz-row nzType="flex" nzJustify="end">
+  <button nz-button [nzSize]="size" nzType="lime">新增</button>
+  <button nz-button [nzSize]="size" nzType="primary">查询</button>
+  <button nz-button [nzSize]="size" nzType="danger">删除</button>
+</div>
+
+<nz-table #borderedTable nzBordered
+  [nzData]="dataSet"
+  [nzLoading]="_loading"
+  (nzPageIndex)="pageIndex"
+  (nzPageSize)="pageSize">
+    <thead>
+      <tr>
+        <th>所属用户</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>学习任务</th>
+        <th>网站名</th>
+        <th>域名</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of borderedTable.data">
+        <td>{{ data.tUser }}</td>
+        <td>{{ data.username }}</td>
+        <td>{{ data.password }}</td>
+        <td><a [routerLink]="['/site/jcw']" [queryParams]="{id: 1}"
+        routerLinkActive="router-link-active" nz-button [nzSize]="size" nzType="primary">详情</a></td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.domain }}</td>
+      </tr>
+    </tbody>
+  </nz-table>

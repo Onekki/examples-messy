@@ -1,0 +1,42 @@
+<h4>锦程网</h4>
+<nz-tabset [nzTabPosition]="'top'">
+  <nz-tab *ngFor="let task of extra.studyTasks" [nzTitle]="task.title">
+      <nz-table [nzData]="[0]" nzBordered [nzShowPagination]="false" [nzSize]="small">
+          <thead>
+              <tr>
+                <th nzWidth="50px" nzAlign="center">学时</th>
+                <th nzWidth="50px" nzAlign="center">学分</th>
+                <th nzWidth="50px" nzAlign="center">课程数</th>
+              </tr>
+            </thead>
+          <tbody>
+            <tr>
+              <td nzAlign="center">{{ task.classHour }}</td>
+              <td nzAlign="center">{{ task.credit }}</td>
+              <td nzAlign="center">{{ task.courseCount }}</td>
+            </tr>
+          </tbody>
+      </nz-table>
+      <nz-table #extraTable nzBordered [nzSize]="small" [nzShowPagination]="false"
+      [nzData]="record">
+      <thead>
+        <tr>
+          <th nzWidth="50px" nzAlign="center">课程名称</th>
+          <th nzWidth="50px" nzAlign="center">已观看时长</th>
+          <th nzWidth="50px" nzAlign="center">视频总时长</th>
+          <th nzWidth="50px" nzAlign="center">课内习题正确率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of extraTable.data">
+          <td nzAlign="center">{{ course.title }}</td>
+          <td nzAlign="center">{{ course.videoDone }}</td>
+          <td nzAlign="center">{{ course.videoTotal }}</td>
+          <td nzAlign="center">{{ course.correctRate }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+</nz-tabset>
+
+

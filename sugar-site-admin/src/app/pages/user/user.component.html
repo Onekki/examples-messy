@@ -1,0 +1,38 @@
+<h4>用户列表</h4>
+
+<div nz-row nzType="flex" nzJustify="end">
+  <button nz-button [nzSize]="size" nzType="lime">新增</button>
+  <button nz-button [nzSize]="size" nzType="primary">查询</button>
+  <button nz-button [nzSize]="size" nzType="danger">删除</button>
+</div>
+
+<nz-table #borderedTable nzBordered 
+  [nzData]="dataSet"
+  [nzLoading]="_loading"
+  (nzPageIndex)="pageIndex"
+  (nzPageSize)="pageSize">
+    <thead>
+      <tr>
+        <th>用户名</th>
+        <th>名字</th>
+        <th>号码</th>
+        <th>邮箱</th>
+        <th>学校</th>
+        <th>注册时间</th>
+        <th>网站</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of borderedTable.data">
+        <td>{{ data.username }}</td>
+        <td>{{ data.realname }}</td>
+        <td>{{ data.phone }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.school }}</td>
+        <td>{{ data.registerTime }}</td>
+        <td *ngFor="let item of data.tAccounts">
+          <a nz-button [nzSize]="size" nzType="primary">{{ item.name }}</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>

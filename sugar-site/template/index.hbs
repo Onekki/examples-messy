@@ -1,0 +1,88 @@
+{{#extend "css"}}
+<!-- CSS Libraries -->
+{{/extend}}
+
+<div class="main-wrapper">
+  {{> navbar}}
+  {{> aside}}
+  <!-- Main Content -->
+  <div class="main-content" style="min-height: 450px;">
+    <section class="section">
+      <div class="section-header">
+        <h1>{{ title }}</h1>
+        <div class="section-header-breadcrumb">
+          <div id="checkin-div" class="breadcrumb-item active">
+            <a href="#" class="btn btn-icon disabled icon-left btn-primary"><i class="far fa-calendar-check"></i>
+              已签到</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="card card-statistic-2">
+            <div class="card-icon shadow-primary bg-primary">
+              <i class="fas fa-crown"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>加入时长</h4>
+              </div>
+              <div class="card-body">
+                <span class="counter">1</span> 天
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="card card-statistic-2">
+            <div class="card-icon shadow-success bg-success">
+              <i class="fas fa-tint"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>使用次数</h4>
+              </div>
+              <div class="card-body">
+                <span class="counter">13</span>次
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="card card-statistic-2">
+            <div class="card-icon shadow-info bg-info">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>绑定账号数</h4>
+              </div>
+              <div class="card-body">
+                <span class="counter">2个</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="card card-statistic-2">
+            <div class="card-icon shadow-warning bg-warning">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4>钱包余额</h4>
+              </div>
+              <div class="card-body">
+                <span class="counter">1.46元</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  {{> footer}}
+</div>
+
+{{#extend "js"}}
+<script src="/js/plugin/jquery.nicescroll.min.js"></script>
+{{/extend}}

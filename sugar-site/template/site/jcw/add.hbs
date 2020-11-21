@@ -1,0 +1,95 @@
+{{#extend "css"}}
+<!-- CSS Libraries -->
+{{/extend}}
+
+<div class="main-wrapper">
+  {{> navbar}}
+  {{> aside}}
+  <!-- Main Content -->
+  <div class="main-content" style="min-height: 450px;">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-header-back">
+          <a href="#" onClick="javascript :history.go(-1)" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+        </div>
+        <h1>{{ title }}</h1>
+      </div>
+      <div class="section-body">
+        <div class="form-group row mb-4">
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">用户名</label>
+          <div class="col-sm-12 col-md-7">
+            <input id="username" type="text" class="form-control" name="username" tabindex="2" required>
+            <div class="invalid-feedback">
+              请输入用户名
+            </div>
+          </div>
+        </div>
+        <div class="form-group row mb-4">
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">密码</label>
+          <div class="col-sm-12 col-md-7">
+            <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+            <div class="invalid-feedback">
+              请输入密码
+            </div>
+          </div>
+        </div>
+        <div class="form-group row mb-4">
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+          <div class="col-sm-12 col-md-7">
+            <button onclick="add()" class="btn btn-primary">绑定</button>
+          </div>
+        </div>
+      </div>
+      {{!-- section-body end --}}
+    </section>
+  </div>
+  {{> footer}}
+</div>
+
+{{#extend "js"}}
+<script src="/js/plugin/jquery.nicescroll.min.js"></script>
+<script src="/js/plugin/sweetalert.min.js"></script>
+<script>
+  function add()
+  {
+    if ( !$( "#username" ).val() || !$( "#password" ).val() )
+    {
+      return;
+    }
+    
+    $.ajax( {
+      type: "POST",
+      url: "../../api/site/bind",
+      dataType: "json",
+      data: {
+        uid: getCookie("id"),
+        username: $( "#username" ).val(),
+        password: $( "#password" ).val(),
+        siteName: 'jcw'
+      },
+      success: function ( data )
+      {
+        swal( "绑定成功", 'success' )
+        history.go(-1)
+      },
+      error: function ( xhr, msg, error )
+      {
+        $( "form" ).removeClass( 'was-validated' );
+        swal( "出错了", xhr.responseText, 'error' )
+      }
+    } )
+  }
+
+  function getCookie( cname )
+  {
+    var name = cname + "=";
+    var ca = document.cookie.split( ';' );
+    for ( var i = 0; i < ca.length; i++ )
+    {
+      var c = ca[i].trim();
+      if ( c.indexOf( name ) == 0 ) return c.substring( name.length, c.length );
+    }
+    return "";
+  }
+</script>
+{{/extend}}

@@ -1,0 +1,96 @@
+{{#extend "css"}}
+<!-- CSS Libraries -->
+{{/extend}}
+
+<div class="main-wrapper">
+  {{> navbar}}
+  {{> aside}}
+  <!-- Main Content -->
+  <div class="main-content" style="min-height: 450px;">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-header-back">
+          <a href="#" onClick="javascript :history.go(-1)" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+        </div>
+        <h1>{{ title }}</h1>
+        <div class="section-header-breadcrumb">
+          <div id="checkin-div" class="breadcrumb-item active">
+            <a href="#" onclick="checkin()" class="btn btn-icon icon-left btn-danger">一键全盘</a>
+          </div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="row">
+          <div class="col-12">
+            <ul class="nav nav-pills" role="tablist">
+              {{#each data.static.initTasks}}
+              <li class="nav-item">
+                <a class="nav-link {{#if @first}}active{{/if}}" href="#tab-{{ id }}" data-toggle="tab"
+                  role="tab">{{ title }}{{ class }}</a>
+              </li>
+              {{/each}}
+            </ul>
+            <div class="tab-content">
+              {{#each data.dynamic.tasks}}
+              <div class="tab-pane fade {{#if @first}}active show{{/if}}" id="tab-{{ id }}" role="tabpanel">
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <tr>
+                        <th>#</th>
+                        <th>课程名称</th>
+                        <th>已观看时长</th>
+                        <th>视频总时长</th>
+                        <th>课内习题正确率</th>
+                        <th>操作</th>
+                      </tr>
+
+                      {{#each courses}}
+                      <tr>
+                        <td>{{ @index }}</td>
+                        <td>{{ title }}</td>
+                        <td class="align-middle">{{ videoDone }}</td>
+                        <td>{{ videoTotal }}</td>
+                        <td>
+                          <div class="badge badge-primary">{{ correctRate }}</div>
+                        </td>
+                        <td>
+                          <a href="/site/jcw/detail/{{ id }}" class="btn  
+                            {{#equal videoDone videoTotal}}btn-success disabled{{else}}btn-warning{{/equal}}">
+                            {{#equal videoDone videoTotal}}已盘{{else}}盘他{{/equal}}</a>
+                        </td>
+                      </tr>
+                      {{/each}}
+
+                    </table>
+                  </div>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+
+      </div>
+      {{!-- section-body end --}}
+    </section>
+  </div>
+  {{> footer}}
+</div>
+
+{{#extend "js"}}
+<script src="/js/plugin/jquery.nicescroll.min.js"></script>
+<script src="/js/plugin/sweetalert.min.js"></script>
+<script>
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i].trim();
+      if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+  }
+</script>
+{{/extend}}

@@ -1,0 +1,25 @@
+import { PassportStrategy } from "@nestjs/passport";
+import { Strategy, ExtractJwt, VerifiedCallback } from 'passport-jwt';
+import { UnauthorizedException } from "@nestjs/common";
+import { UserService } from "src/feature/user/user.service";
+
+export class JwtStrategy extends PassportStrategy(Strategy) {
+    constructor(private readonly userService: UserService) {
+        super({
+            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            secretOrKey: '1AGy4bCUoECDZ4yI6h8DxHDwgj84EqStMNyab8nPChQ='
+        })
+    }
+    
+    async validate(payload, done: VerifiedCallback) {
+        console.log('payload: ', payload);
+        const { email } = payload;
+        const user = await this.userService.findOneByEmail(email)
+    
+        if (!user) {
+          throw new UnauthorizedException('没找到用户');
+        }
+    
+        return user;
+      }
+}

@@ -1,0 +1,37 @@
+{{#extend "css"}}
+<!-- CSS Libraries -->
+{{/extend}}
+
+<div class="main-wrapper">
+  {{> navbar}}
+  {{> aside}}
+  <!-- Main Content -->
+  <div class="main-content" style="min-height: 450px;">
+    <section class="section">
+      <div class="section-header">
+        <h1>网站选择</h1>
+      </div>
+      <div class="section-body">
+        <div class="row mt-sm-4">
+          <div class="col-lg-6">
+            <div class="card card-hero" onclick="location='site/jcw'">
+              <div class="card-header os-card windows-card">
+                <div class="card-icon">
+                  <i class="fas fa-cat"></i>
+                </div>
+                <h4>锦程网</h4>
+                <div class="card-description">帮你看视频、完成视频内题目和课后习题</div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+      {{!-- section-body --}}
+    </section>
+  </div>
+  {{> footer}}
+</div>
+
+{{#extend "js"}}
+<script src="/js/plugin/jquery.nicescroll.min.js"></script>
+{{/extend}}

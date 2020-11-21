@@ -1,0 +1,209 @@
+<section class="section">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+        <div class="login-brand">
+          <h1>Sugar Site</h1>
+        </div>
+
+        <div class="card card-primary">
+          <div class="card-header">
+            <h4>注册</h4>
+          </div>
+          <div class="card-body">
+            <form action="javascript:void(0);" method="POST" class="needs-validation" novalidate="">
+              <div class="row">
+                <div class="form-group col-lg-6 col-sm-12 col-xs-12">
+                  <label for="nickname">昵称</label>
+                  <input id="nickname" type="text" class="form-control" name="nickname" required="" autofocus="">
+                  <div class="invalid-feedback">
+                    请填写昵称
+                  </div>
+                </div>
+
+                <div class="form-group col-lg-6 col-sm-12 col-xs-12">
+                  <label for="code" class="d-block">邀请码，如果没有请填写 Onekki </label>
+                  <input id="code" type="text" class="form-control" name="code" required="">
+                  <div class="invalid-feedback">
+                    请填写邀请码，如果有请填写邀请你的人的，如果没有请填写 Onekki
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-lg-6 col-sm-12 col-xs-12">
+                  <label for="email">邮箱</label>
+                  <div class="input-group">
+                    <input type="text" id="email" class="form-control col-7" required="">
+                    <select class="custom-select input-group-append col-5" id="email_postfix" required="" style="border-top-right-radius: .25rem;
+                          border-bottom-right-radius: .25rem;">
+                      <option value="@qq.com"  selected="">@qq.com</option>
+                      <option value="@outlook.com">@outlook.com</option>
+                      <option value="@163.com">@163.com</option>
+                      <option value="@126.com">@126.com</option>
+                      <option value="@yeah.net">@yeah.net</option>
+                      <option value="@foxmail.com">@foxmail.com</option>
+                      <option value="@gmail.com">@gmail.com</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      请填写邮箱
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-lg-6 col-sm-12 col-xs-12">
+                  <label for="email">邮箱验证码</label>
+                  <div class="input-group mb-3">
+                    <input id="email_code" type="text" class="form-control" name="email" required="">
+                    <div class="input-group-append">
+                      <button id="email_verify" class="btn btn-primary" type="button">获取验证码</button>
+                    </div>
+                  </div>
+                  <div class="invalid-feedback">
+                    请填写邮箱验证码
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-lg-6 col-sm-12 col-xs-12">
+                  <label for="password" class="d-block">密码</label>
+                  <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator"
+                    name="password" required="">
+                  <div id="pwindicator" class="pwindicator pw-weak">
+                    <div class="bar"></div>
+                    <div class="label">超级弱鸡</div>
+                  </div>
+                  <div class="invalid-feedback">
+                    请填写密码
+                  </div>
+                </div>
+                <div class="form-group col-lg-6 col-sm-12 col-xs-12">
+                  <label for="repassword" class="d-block">重复密码</label>
+                  <input id="repassword" type="password" class="form-control" name="repassword" required="">
+                  <div class="invalid-feedback">
+                    请再次填写密码
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" name="agree" class="custom-control-input" id="agree" checked="checked"
+                    required="">
+                  <label class="custom-control-label" for="agree">注册即代表同意<a href="/tos" target="blank">服务条款</a></label>
+                  <div class="invalid-feedback">
+                    请阅读服务条款并勾选
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button id="register-confirm" onclick="register()" class="btn btn-primary btn-lg btn-block">
+                  注册
+                </button>
+              </div>
+            </form>
+
+          </div>
+          {{!-- card-body --}}
+        </div>
+        <div class="mt-5 text-muted text-center">
+          已有账号? <a href="/login">登录</a>
+        </div>
+        <div class="simple-footer">
+          Copyright &copy; Onekki 2019
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{#extend "js"}}
+<script src="/js/plugin/sweetalert.min.js"></script>
+<script src="/js/plugin/jquery.pwstrength.min.js"></script>
+<script>
+  $( ".pwstrength" ).pwstrength( {
+    texts: ['超级弱鸡', '弱鸡', '一般般', '有点强', '很强👌']
+  } );
+
+  function login()
+  {
+    if ( !$( "#email" ).val() || !$( "#password" ).val() )
+    {
+      return;
+    }
+    $.ajax( {
+      type: "POST",
+      url: "/auth/login",
+      dataType: "json",
+      data: {
+        email: $( "#email" ).val(),
+        password: $( "#password" ).val()
+      },
+      success: function ( data )
+      {
+        window.location.assign( '/' )
+      },
+      error: function ( xhr, msg, error )
+      {
+        $( "form" ).removeClass( 'was-validated' );
+        swal( "出错了", xhr.responseText, 'error' )
+      }
+    } )
+  }
+
+  function register()
+  {
+    $( '#register-confirm' ).addClass( "disabled" )
+    $( '#register-confirm' ).attr( "disabled", "disabled" )
+    // vaildation
+    if (
+      !$( "#nickname" ).val() ||
+      !$( "#email" ).val() ||
+      !$( "#password" ).val() ||
+      !$( "#repassword" ).val()
+    )
+    {
+      $( '#register-confirm' ).removeClass( "disabled" )
+      $( '#register-confirm' ).removeAttr( "disabled" )
+      return false
+    };
+    // eof vaildation
+
+    var code = $( "#code" ).val();
+    var email = $( "#email" ).val() + $( "#email_postfix" ).val();
+    $.ajax( {
+      type: "POST",
+      url: "/auth/register",
+      dataType: "json",
+      data: {
+        email: email,
+        password: $( "#password" ).val()
+        // name: $( "#nickname" ).val(),
+        // code: code,
+        // emailcode: $( "#email_code" ).val()
+      },
+      success: function ( data )
+      {
+        swal( {
+          type: 'success',
+          title: '注册成功',
+          showCloseButton: true,
+          onClose: () =>
+          {
+            login();
+          }
+        })
+      },
+      error: function ( xhr, msg, error )
+      {
+        $( '#register-confirm' ).removeClass( "disabled" )
+        $( '#register-confirm' ).removeAttr( "disabled" )
+        $( "#code" ).val( code );
+        swal( "出错了", xhr.responseText, 'error' )
+      }
+    } );
+  }
+
+</script>
+{{/extend}}
