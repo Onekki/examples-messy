@@ -1,0 +1,85 @@
+{{#extend "css"}}
+    <!-- CSS Libraries -->
+{{/extend}}
+
+<div class="main-wrapper">
+    {{> navbar}}
+    {{> aside}}
+    <!-- Main Content -->
+    <div class="main-content" style="min-height: 450px;">
+        <section class="section">
+            <div class="section-header">
+                <h1>{{ title }}</h1>
+                <div class="section-header-button">
+                    <a class="btn btn-primary" href="/njc/add">添加绑定账号</a>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>账号列表</h4>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>
+                                                <div class="custom-checkbox custom-control">
+                                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                                           class="custom-control-input" id="checkbox-all">
+                                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                                </div>
+                                            </th>
+                                            <th>用户名</th>
+                                            <th>真名</th>
+                                            <th>年级</th>
+                                            <th>班级</th>
+                                            <th>操作</th>
+                                        </tr>
+
+                                        {{#equal data.njcUsers.length 0}}
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="align-middle">列表为空</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        {{/equal}}
+                                        {{#each data.njcUsers}}
+                                            <tr>
+                                                <td class="p-0 text-center">
+                                                    <div class="custom-checkbox custom-control">
+                                                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-1">
+                                                        <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                                    </div>
+                                                </td>
+                                                <td>{{ username }}</td>
+                                                <td class="align-middle">{{ realname }}</td>
+                                                <td>{{ gradeCode }}</td>
+                                                <td>
+                                                    <div class="badge badge-primary">{{ classCode }}</div>
+                                                </td>
+                                                <td><a href="/njc/detail/{{ id }}" class="btn btn-secondary">详情</a></td>
+                                            </tr>
+                                        {{/each}}
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{!-- 列表结束 --}}
+            </div>
+        </section>
+    </div>
+    {{> footer}}
+</div>
+
+{{#extend "js"}}
+    <script src="/js/plugin/jquery.nicescroll.min.js"></script>
+{{/extend}}
