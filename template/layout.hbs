@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/all.min.css">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="/theme/css/style.min.css">
+  <link rel="stylesheet" href="/theme/css/components.min.css">
+
+  {{{block "css"}}}
+
+</head>
+
+<body>
+  {{{body}}}
+  {{!-- General JS Scripts --}}
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/plugin/popper.js"></script>
+  <script src="/js/plugin/tooltip.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/scripts.js"></script>
+  
+  {{{block "js"}}}
+</body>
+
+</html>
