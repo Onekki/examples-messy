@@ -1,0 +1,57 @@
+<header class="header header-orange header-transparent header-waterfall ui-header" style="background-color: #54aff9;">
+    <ul class="nav nav-list pull-left">
+        <div>
+            <a data-toggle="menu" href="#ui_menu">
+                <span class="icon icon-lg text-white">menu</span>
+            </a>
+        </div>
+    </ul>
+    <ul class="nav nav-list pull-right">
+        <div class="dropdown margin-right">
+            <a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
+                <span class="access-hide">onekki</span>
+                <span class="icon icon-cd margin-right">account_circle</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                    <a class="padding-right-cd waves-attach" href="{{ url_for('site.logout') }}"><span
+                            class="icon icon-lg margin-right">exit_to_app</span>登出</a>
+                </li>
+            </ul>
+
+        </div>
+    </ul>
+</header>
+
+<nav aria-hidden="true" class="menu menu-left nav-drawer nav-drawer-md" id="ui_menu" tabindex="-1">
+    <div class="menu-scroll">
+        <div class="menu-content">
+            <a class="menu-logo" href="#"><i class="icon icon-lg">language</i>&nbsp;Onekki's Blog
+            </a>
+            <ul class="nav">
+                <li>
+                    <a class="waves-attach waves-effect" data-toggle="collapse"
+                        href="#ui_menu_me">首页</a>
+                    <ul class="menu-collapse collapse out" id="ui_menu_me">
+                        <li>
+                            <a href="{{ url_for('site.index') }}">
+                                <i class="icon icon-lg">home</i>&nbsp;首页
+                            </a>
+                        </li>
+                    </ul>
+
+                    <a class="waves-attach waves-effect" data-toggle="collapse"
+                        href="#ui_menu_use">文章</a>
+                    <ul class="menu-collapse collapse out" id="ui_menu_use">
+                        <li>
+                            <a href="{{ url_for('blog.article_list', page=1) }}">
+                                <i class="icon icon-lg">format_list_numbered</i>&nbsp;文章列表
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
